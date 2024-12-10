@@ -1,0 +1,35 @@
+# inventory.yml
+all:
+  vars:
+    ansible_user: admin
+    ansible_password: AdminPassword
+    ansible_network_os: cisco.ios.ios
+  children:
+    HQ_branch:
+      hosts:
+        AccSwHQ-1:
+          ansible_host: 192.168.99.4
+        AccSwHQ-2:
+          ansible_host: 192.168.99.3
+        DistSwHQ-1:
+          ansible_host: 192.168.99.2
+        DistSwHQ-2:
+          ansible_host: 192.168.99.1
+        CoreRT-1:
+          ansible_host: 201.0.111.1
+        CoreRT-2:
+          ansible_host: 201.0.111.5
+
+    secondary_branch_A:
+      hosts:
+        RT-A-1:
+          ansible_host: 203.0.113.2
+        AccSwA-1:
+          ansible_host: 192.168.99.6
+
+    secondary_branch_B:
+      hosts:
+        RT-B-1:
+          ansible_host: 205.0.115.1
+        AccSwB-1:
+          ansible_host: 192.168.99.5

@@ -1,0 +1,152 @@
+# Subdirs
+/archive/
+
+# Operating System files
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Node.js dependencies
+/node_modules/
+
+# npm package lock file
+package-lock.json
+yarn.lock
+
+# Python bytecode
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+
+# Java, Scala, and Android Studio
+*.class
+*.log
+*.war
+*.ear
+*.jar
+*.apk
+*.aab
+*.gradle
+.gradle/
+build/
+
+# Eclipse, IntelliJ, and other IDEs
+.idea/
+.vscode/
+.project
+.settings/
+
+# Visual Studio
+.vs/
+.vscode/
+.vsconfig
+.idea/
+
+# MacOS system files
+.AppleDouble
+.LSOverride
+
+# Windows Installer files
+Thumbs.db
+ehthumbs.db
+
+# Log files
+*.log
+
+# Coverage directory
+coverage/
+
+# Environment variables or secrets
+.env
+.env.local
+.env.*.local
+
+# Build output directories
+/dist/
+/build/
+
+# Temporary files
+*.bak
+*.swp
+*.swo
+*~
+*.tmp
+*.temp
+
+# Web files (e.g., generated during build process)
+*.css.map
+*.js.map
+
+# Rust
+target/
+
+# Ruby and Rails
+*.gem
+*.rbc
+*.sassc
+vendor/
+
+# LaTeX
+*.aux
+*.bbl
+*.blg
+*.log
+*.out
+*.toc
+
+# JetBrains IDEs (IntelliJ IDEA, PhpStorm, PyCharm, etc.)
+.idea/
+
+# Xcode
+DerivedData/
+
+# Docker
+.docker/
+docker-compose.override.yml
+
+# Other
+*.bak
+*.swp
+*.swo
+
+# ---------------------------------------
+# Commands to remove already pushed files from the origin (remote)
+# ---------------------------------------
+
+# 1. Remove files already pushed to remote but now ignored by .gitignore
+# First, make sure the file is included in .gitignore (above) so Git will ignore it in the future.
+# Then run the following commands to remove the file from Git tracking history (not from the working directory).
+
+# Example: Remove a file (like .DS_Store) from Git tracking:
+#       git rm --cached .DS_Store
+
+# 2. If there are multiple files to remove (e.g., node_modules, log files, etc.), you can:
+#       git rm --cached -r node_modules/
+#       git rm --cached *.log
+
+# 3. After running `git rm --cached` for all files you want to untrack, commit the changes:
+#       git commit -m "Remove ignored files from Git history"
+
+# 4. Push the changes to the remote repository:
+#       git push origin main  # or the appropriate branch
+
+# 5. If files were pushed to the remote and you want to remove them from the Git history completely (e.g., sensitive data),
+# use the `filter-branch` or `filter-repo` command to rewrite history. For example:
+
+# WARNING: This rewrites history. Make sure all collaborators are aware and ready to rebase.
+#       git filter-branch --force --index-filter \
+#         'git rm --cached --ignore-unmatch .DS_Store' \
+#         --prune-empty --tag-name-filter cat -- --all
+
+# Or use `git filter-repo` (a more efficient option):
+#       git filter-repo --path .DS_Store --invert-paths
+
+# 6. After performing history rewriting, you need to force-push:
+#       git push --force --all
+#       git push --force --tags
+
+# 7. Finally, everyone who cloned the repository will need to fetch the latest changes and rebase their work:
+#       git fetch --all
+#       git rebase origin/main  # or their current working branch
+

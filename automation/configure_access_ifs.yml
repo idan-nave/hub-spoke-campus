@@ -1,0 +1,20 @@
+---
+- name: Configure access layer switches
+  hosts:
+    - AccSwHQ-1
+    - AccSwHQ-2
+    - AccSwB-1
+    - AccSwA-1
+  gather_facts: no
+  tasks:
+    - name: Configure Portfast and BPDU Guard on specified interfaces
+      cisco.ios.ios_interface:
+        name: "{{ item.interface }}"
+        spanning_tree_portfast: true
+        spanning_tree_bpduguard_enable: true
+        switchport_mode: access
+      loop:
+        - { interface: "Ethernet0/1" }
+        - { interface: "Ethernet0/2" }
+      vars:
+        ansible_network_os: cisco.ios.ios

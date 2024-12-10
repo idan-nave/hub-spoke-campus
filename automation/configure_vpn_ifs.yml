@@ -1,0 +1,100 @@
+---
+- name: Configure Tunnel Interfaces on Cisco Routers
+  hosts: all
+  gather_facts: no
+  tasks:
+    - name: Configure Tunnel 0 on Branch A
+      cisco.ios.ios_interface:
+        name: Tunnel0
+        description: "Link to CoreRT-1, E0/1"
+        ipv4:
+          address: 172.16.1.2
+          mask: 255.255.255.252
+        tunnel_source: E0/1
+        tunnel_destination: 201.0.111.1
+        state: present
+      when: inventory_hostname == 'RT-A-1'
+
+    - name: Configure Tunnel 1 on Branch A
+      cisco.ios.ios_interface:
+        name: Tunnel1
+        description: "Link to CoreRT-2, E0/1"
+        ipv4:
+          address: 172.16.2.6
+          mask: 255.255.255.252
+        tunnel_source: E0/1
+        tunnel_destination: 201.0.111.5
+        state: present
+      when: inventory_hostname == 'RT-A-1'
+
+    - name: Configure Tunnel 0 on Branch B
+      cisco.ios.ios_interface:
+        name: Tunnel0
+        description: "Link to CoreRT-2, E0/1"
+        ipv4:
+          address: 172.16.1.6
+          mask: 255.255.255.252
+        tunnel_source: E0/1
+        tunnel_destination: 201.0.111.5
+        state: present
+      when: inventory_hostname == 'RT-B-1'
+
+    - name: Configure Tunnel 1 on Branch B
+      cisco.ios.ios_interface:
+        name: Tunnel1
+        description: "Link to CoreRT-1, E0/1"
+        ipv4:
+          address: 172.16.2.2
+          mask: 255.255.255.252
+        tunnel_source: E0/1
+        tunnel_destination: 201.0.111.1
+        state: present
+      when: inventory_hostname == 'RT-B-1'
+
+    - name: Configure Tunnel 0 on HQ CoreRT-1
+      cisco.ios.ios_interface:
+        name: Tunnel0
+        description: "to RT-A-1, E0/1"
+        ipv4:
+          address: 172.16.1.1
+          mask: 255.255.255.252
+        tunnel_source: Et0/1
+        tunnel_destination: 203.0.113.2
+        state: present
+      when: inventory_hostname == 'CoreRT-1'
+
+    - name: Configure Tunnel 1 on HQ CoreRT-1
+      cisco.ios.ios_interface:
+        name: Tunnel1
+        description: "to RT-B-1, E0/1"
+        ipv4:
+          address: 172.16.2.1
+          mask: 255.255.255.252
+        tunnel_source: Et0/1
+        tunnel_destination: 205.0.115.1
+        state: present
+      when: inventory_hostname == 'CoreRT-1'
+
+    - name: Configure Tunnel 0 on HQ CoreRT-2
+      cisco.ios.ios_interface:
+        name: Tunnel0
+        description: "to RT-B-1, E0/1"
+        ipv4:
+          address: 172.16.1.5
+          mask: 255.255.255.252
+        tunnel_source: Et0/1
+        tunnel_destination: 205.0.115.1
+        state: present
+      when: inventory_hostname == 'CoreRT-2'
+
+    - name: Configure Tunnel 1 on HQ CoreRT-2
+      cisco.ios.ios_interface:
+        name: Tunnel1
+        description: "to RT-A-1, E0/1"
+        ipv4:
+          address: 172.16.2.5
+          mask: 255.255.255.252
+        tunnel_source: Et0/1
+        tunnel_destination: 203.0.113.2
+        state: present
+      when: inventory_hostname == 'CoreRT-2'
